@@ -187,3 +187,61 @@ From the repository root, run:
 
 The suite is configured for Chromium, Firefox, and WebKit. It exercises the
 public Playwright documentation website and therefore requires network access.
+
+ADDING A FILE, CREATING A PR, AND MERGING
+=========================================
+Use this workflow when adding a file or other change to the repository. Work
+on a feature branch; do not commit directly to main.
+
+1. Create or update the file
+   Add the new file to the repository and review its contents. Check the
+   working tree to confirm the intended files are the only changes:
+
+     git status --short
+     git diff --check
+
+2. Create a feature branch
+   Start from the latest main branch, then create and switch to a descriptive
+   branch:
+
+     git switch main
+     git pull origin main
+     git switch -c <branch-name>
+
+   If the change is already on a feature branch, keep using that branch and
+   make sure it is based on the latest main as appropriate.
+
+3. Stage and commit the change
+   Stage the intended file(s), inspect what is staged, and commit:
+
+     git add <file-path>
+     git diff --cached --check
+     git diff --cached
+     git commit -m "Describe the change"
+
+   Use `git add -A` only when every change in the working tree is intended for
+   this commit. Check `git status` after committing.
+
+4. Push the branch to GitHub
+
+     git push -u origin <branch-name>
+
+5. Open a pull request
+   On GitHub, open the repository's "Pull requests" tab and select "New pull
+   request" (or use the compare page). Select `main` as the base branch and
+   the feature branch as the compare/head branch. Review the changed-file list,
+   enter a clear title and summary, then select "Create pull request".
+
+6. Review the PR and check for conflicts
+   Review the PR diff and confirm it contains only the intended changes.
+   Check GitHub's merge/conflict status and required CI checks. Continue only
+   when GitHub reports that the branch can be merged automatically and required
+   checks have passed. If there are conflicts, do not merge: update the feature
+   branch from `main`, resolve the conflicts, test the result, commit and push
+   the resolution, then review the updated PR again.
+
+7. Merge and verify
+   When the review is complete, the PR is conflict-free, and required checks
+   pass, use the repository's approved merge method on GitHub to merge the PR
+   into `main`. Verify that the PR shows as merged and that `main` contains
+   the resulting change.
