@@ -244,4 +244,5 @@ on a feature branch; do not commit directly to main.
    When the review is complete, the PR is conflict-free, and required checks
    pass, use the repository's approved merge method on GitHub to merge the PR
    into `main`. Verify that the PR shows as merged and that `main` contains
-   the resulting change.
+   the resulting change. After confirming the merge succeeded, close the
+   browser window or tab used for the PR.
