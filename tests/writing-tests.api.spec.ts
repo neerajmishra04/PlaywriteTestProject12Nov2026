@@ -5,7 +5,7 @@ import {
   thenResponseIsSuccessful,
   thenResponseUsesExpectedUrl,
   whenRequestWritingTestsPage,
-} from './steps/writing-tests-api.steps';
+} from './step-definitions/api/writing-tests-api.steps';
 
 test('TC-WT-001: API returns the Writing tests documentation page', async ({ request }) => {
   const url = await givenWritingTestsPageUrl();
