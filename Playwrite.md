@@ -16,7 +16,8 @@ UI automated tests:     tests/writing-tests.spec.ts
 API automated tests:    tests/writing-tests.api.spec.ts
 Page object:            tests/pages/writing-tests.page.ts
 Shared UI helper:       tests/support/ui-actions.ts
-API step definitions:   tests/steps/writing-tests-api.steps.ts
+UI step definitions:    tests/step-definitions/ui/writing-tests-ui.steps.ts
+API step definitions:   tests/step-definitions/api/writing-tests-api.steps.ts
 Manual test steps:      tests/manual-steps/writing-tests.manual.md
 
 Requirement IDs
@@ -103,16 +104,16 @@ STEP DEFINITION / AUTOMATION MAPPING
 The Gherkin scenarios in tests/features/writing-tests.feature are the
 human-readable scenario specification. The executable automation is currently
 implemented with Playwright Test's test.step() blocks in
-tests/writing-tests.spec.ts. There is no Cucumber/Gherkin runner or separate
-Cucumber step-definition binding file in this project; the mappings below
-describe the corresponding Playwright steps and page-object calls.
+the UI step-definition module and invoked by tests/writing-tests.spec.ts.
+There is no Cucumber/Gherkin runner or Cucumber binding in this project.
 
 The API-level checks use Playwright's APIRequestContext to request the
 documentation page and verify its HTTP status, final URL, and response HTML.
 Their reusable Given/When/Then-style Playwright step helpers are in
-tests/steps/writing-tests-api.steps.ts, with scenarios in
+tests/step-definitions/api/writing-tests-api.steps.ts, with scenarios in
 tests/writing-tests.api.spec.ts. This checks the page's HTTP response; it does
 not add a backend API to the Playwright documentation website.
+The UI step helpers are in tests/step-definitions/ui/writing-tests-ui.steps.ts.
 The standalone manual procedures are in
 tests/manual-steps/writing-tests.manual.md.
 
