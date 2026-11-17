@@ -12,9 +12,12 @@ by an external requirements-management system.
 Application under test: https://playwright.dev/
 Target page:            https://playwright.dev/docs/writing-tests
 Feature source:         tests/features/writing-tests.feature
-Automated tests:        tests/writing-tests.spec.ts
+UI automated tests:     tests/writing-tests.spec.ts
+API automated tests:    tests/writing-tests.api.spec.ts
 Page object:            tests/pages/writing-tests.page.ts
 Shared UI helper:       tests/support/ui-actions.ts
+API step definitions:   tests/steps/writing-tests-api.steps.ts
+Manual test steps:      tests/manual-steps/writing-tests.manual.md
 
 Requirement IDs
 ---------------
@@ -104,6 +107,15 @@ tests/writing-tests.spec.ts. There is no Cucumber/Gherkin runner or separate
 Cucumber step-definition binding file in this project; the mappings below
 describe the corresponding Playwright steps and page-object calls.
 
+The API-level checks use Playwright's APIRequestContext to request the
+documentation page and verify its HTTP status, final URL, and response HTML.
+Their reusable Given/When/Then-style Playwright step helpers are in
+tests/steps/writing-tests-api.steps.ts, with scenarios in
+tests/writing-tests.api.spec.ts. This checks the page's HTTP response; it does
+not add a backend API to the Playwright documentation website.
+The standalone manual procedures are in
+tests/manual-steps/writing-tests.manual.md.
+
 Feature scenario: Navigate from Docs to Writing tests
   Given I am on the Playwright home page
     -> WritingTestsPage.openHomePage()
@@ -184,6 +196,10 @@ RUNNING THE AUTOMATED TESTS
 From the repository root, run:
 
   npx playwright test
+
+To run only the API-level checks:
+
+  npx playwright test tests/writing-tests.api.spec.ts
 
 The suite is configured for Chromium, Firefox, and WebKit. It exercises the
 public Playwright documentation website and therefore requires network access.
